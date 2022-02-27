@@ -1,4 +1,5 @@
-# To-Do- Application
+# To-Do-List Application
+An application to organize your daily life.
 
 To Do List App where you can add new items or cross over your completed items
 To run locally:
