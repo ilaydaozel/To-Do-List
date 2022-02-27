@@ -52,24 +52,30 @@ app.get("/", function(req,res){
         else{
           res.render('list', {listTitle: "Today", newListItems: foundItems});
         }
-
       }
   });
-  //res.send();
+
 });
 
 app.post("/", function(req, res){
-  const item = req.body.newLine;
-  if(req.body.list==="Work"){
-    workItems.push(item);
-    res.redirect("/work");
-  }else{
-      items.push(item);
-      res.redirect("/");
-  }
- //redirects to the homeroute
-
+  const itemName = req.body.newLine;
+  const newItem = new Item({
+    name : itemName
+  });
+  newItem.save();
+  res.redirect("/");
 })
+
+app.post("/delete", function(req, res){
+  const checkedItemId = req.body.checkbox;
+  Item.findByIdAndRemove( checkedItemId, function(err){
+    if(!err){
+      console.log("You removed the items to DB");
+    }
+  });
+  res.redirect("/");
+});
+
 app.get("/work", function(req,res){
   res.render("list", {listTitle: "Work List", newListItems: workItems} )
 });
