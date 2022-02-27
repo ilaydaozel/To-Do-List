@@ -1,5 +1,4 @@
-# To-Do-List
-To-Do List Version 1
+# To-Do- Application
 
 To Do List App where you can add new items or cross over your completed items
 To run locally:
