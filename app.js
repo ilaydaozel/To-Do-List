@@ -2,9 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+require('dotenv').config();
 
 const app = express();
 
+//defining secret variables
+db_username= process.env.DB_USERNAME;
+db_password = process.env.DB_PASSWORD;
 
 app.set('view engine', "ejs");
 app.use(bodyParser.urlencoded({
@@ -12,7 +16,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todolistDB")
+mongoose.connect("mongodb+srv://"+db_username+":"+db_password+"@cluster0.49ss6.mongodb.net/todolistDB")
 
 //item schema
 const itemsSchema = {
@@ -82,7 +86,6 @@ app.get("/:customListName", function(req, res) {
 app.post("/", function(req, res) {
   const itemName = req.body.newLine;
   const listName = req.body.list;
-  console.log(listName);
 
   const item = new Item({
     name: itemName
@@ -102,6 +105,7 @@ app.post("/", function(req, res) {
       }
   });
 
+//to delete an item
 app.post("/delete", function(req, res) {
   const checkedItemId = req.body.checkbox;
   const listName = req.body.listName;
