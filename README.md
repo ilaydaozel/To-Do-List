@@ -12,5 +12,5 @@ list to the end of the page URL.
 
 To run locally:
 $ node app.js
-Open localhost:3000 on your browser
+Open localhost:3003 on your browser
 
